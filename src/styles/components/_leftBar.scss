@@ -1,0 +1,113 @@
+.leftBar {
+    height: 100%;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+
+  
+    .header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding: 20px 0;
+        width: 75%;
+        text-transform: uppercase;
+        transition: 0.3s ease-in;
+
+        .pin {
+           width: 100%;
+           cursor: pointer;
+           transition: 0.3s ease-in;
+           opacity: 0.5;
+
+           svg {
+            float: right;
+           }
+
+           &:hover {
+            opacity: 1;
+           }
+
+        }
+
+        .active {
+            opacity: 1;
+
+
+            &:hover {
+                opacity: 0.5;
+            }
+        }
+    
+    }
+
+    .nav {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 95%;
+        width: 100%;
+
+        span {
+            display: none;
+        }
+
+        ul {
+            display: flex;
+            flex-direction: column;
+
+            li {
+                list-style-type: none;
+                display: flex;
+                gap: 10px;
+                align-items: center;
+                transition: 0.3s ease-in;
+                padding: 15px 50px;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+
+.light {
+    .leftBar {
+
+        .header {
+            border-bottom: 1px solid #210b0026;
+        }
+
+        li {
+            &:hover {
+                background: radial-gradient(#0841e982, #093acb4a);
+            }
+        }
+
+        .active {
+            border-left: 3px solid $lightModeFontColor;
+        }
+    }
+}
+
+.dark {
+    .leftBar {
+
+        .header {
+            border-bottom: 1px solid #ffeae026;
+        }
+
+        li {
+
+            &:hover {
+                background: radial-gradient(#8691db4a, #6671b64a);
+            }
+        }
+
+        .active {
+            border-left: 3px solid $darkModeFontColor;
+        }
+    }
+}

@@ -1,0 +1,62 @@
+.dashboard {
+
+    h1 {
+        padding: 20px 0 40px;
+    }
+
+    .users {
+        padding: 20px;
+        border-radius: 35px;
+        width: max-content;
+        width: 40vw;
+
+        ul {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 5px 0;
+
+
+            li {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                padding: 5px 20px;
+                border-radius: 25px;
+                
+                svg {
+                    font-size: 20px;
+                }
+            }
+        }
+    }
+}
+
+
+.light {
+    .dashboard {
+        .users {
+            background: $lightModeDivBg;
+                ul {
+
+                    li {
+                       background: $darkModeDivBg;
+                    }
+                }
+        }
+    }
+}
+
+.dark {
+    .dashboard {
+        .users {
+            background: $darkModeDivBg;
+                ul {
+
+                    li {
+                        background: $lightModeDivBg;
+                    }
+                }
+        }
+    }
+}
