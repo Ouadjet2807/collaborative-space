@@ -31,9 +31,7 @@
             opacity: 1;
            }
 
-        }
-
-        .active {
+           &.active {
             opacity: 1;
 
 
@@ -41,6 +39,10 @@
                 opacity: 0.5;
             }
         }
+
+        }
+
+       
     
     }
 
@@ -84,11 +86,12 @@
             &:hover {
                 background: radial-gradient(#0841e982, #093acb4a);
             }
+            
+            &.active {
+                border-left: 3px solid $lightModeFontColor;
+            }
         }
 
-        .active {
-            border-left: 3px solid $lightModeFontColor;
-        }
     }
 }
 
@@ -104,10 +107,11 @@
             &:hover {
                 background: radial-gradient(#8691db4a, #6671b64a);
             }
+
+            &.active {
+                border-left: 3px solid $darkModeFontColor;
+            }
         }
 
-        .active {
-            border-left: 3px solid $darkModeFontColor;
-        }
     }
 }

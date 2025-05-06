@@ -25,16 +25,21 @@ export default function LeftBar({setActiveComponent, activeComponent}) {
     if(!tabIsPinned) {
       tl.to('.leftBar', {
         width: "15vw",
-        ease: "back.inOut"
+        ease: "back.inOut",
+        duration: 0.1,
+      })
+      .to('.leftBar li', {
+        padding: '15px 50px',
+        ease: "back.inOut",
+        duration: 0.1
       })
       .to('.leftBar span', {
         opacity: 1,
         display: "block",
-        ease: "back.inOut"
+        ease: "back.inOut",
+        duration: 0.1
       })
-      .to('.leftBar li', {
-        padding: '15px 50px'
-      })
+      
       
       setTabIsOpen(true)
     }
@@ -42,14 +47,15 @@ export default function LeftBar({setActiveComponent, activeComponent}) {
 
   const shorten = () => {
     if(!tabIsPinned) {
-      tl.to('.leftBar span', {
+    tl.to('.leftBar li', {
+      padding: '15px 25px',
+      ease: "back.inOut",
+      duration: 0.1
+    })
+    .to('.leftBar span', {
       opacity: 0,
       display: "none",
       ease: "back.inOut"
-    })
-    .to('.leftBar li', {
-      padding: '15px 25px',
-      duration: 0.1
     })
     .to('.leftBar', {
       width: "4vw",

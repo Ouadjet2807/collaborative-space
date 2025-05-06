@@ -1,0 +1,251 @@
+.account {
+
+    .signChoices {
+        display: flex;
+        align-items: center;
+        margin: 50px auto;
+        width: max-content;
+        font-size: 20px;
+
+        li {
+            list-style-type: none;
+            transition: 0.2s ease-in;
+            padding: 10px 30px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            border-radius: 5px 5px 0 0;
+            
+
+
+            &.active {
+                font-weight: 600;
+                border-bottom: 3px solid #210b0026;
+            } 
+        }
+    }
+
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 35vw;
+        margin: 150px auto;
+
+        .inputBox, .passwordInputBox {
+            border-radius: $borderRadius;
+            position: relative;
+
+            input, select  {
+                background: transparent;
+                border: none;
+                border-radius: $borderRadius;
+                position: relative;
+                z-index: 6;
+                padding: 12px;
+                font-family: $font1;
+
+                &::placeholder {
+                    font-family: $font1;
+                }
+            }
+
+
+            input {
+                width: 100%;
+            }
+
+
+            select {
+                width: 98%;
+            }
+
+
+            
+            &::before {
+                content: "";
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                border-radius: 35px;
+                z-index: 5;
+                backdrop-filter: blur(45px);
+            }
+        }
+
+        .passwordInputBox {
+            display: flex;
+            width: 100%;
+            border-radius: $borderRadius;
+            align-items: center;
+
+            input {
+                width: 94%;
+                background: transparent;
+                border: none;
+                border-radius: 25px 0 0 25px;
+            }
+
+            button {
+                width: 6%;
+                height: 95%;
+                background: transparent;
+                border-right: none;
+                border-top: none;
+                border-bottom: none;
+            }
+        }
+
+
+        button[type="submit"] {
+            margin: 30px auto;
+            width: 30%;
+            padding: 15px;
+            border-radius: $borderRadius;
+            font-family: $font1;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 2px;
+            background: transparent;
+            cursor: pointer;
+            transition: 0.3s ease-in;
+        }
+    }
+}
+
+
+.light {
+
+    .account {
+        .signChoices {
+            border-bottom: 1px solid #210b0026;
+
+            li {
+
+                &:hover {
+                    background: $darkModeDivBg
+                }
+
+                &.active {
+                    border-bottom: 3px solid $lightModeFontColor;
+                }
+            }
+        }
+
+        
+        .inputBox, .passwordInputBox {
+            background: $lightModeGradient;
+            border: 1px solid #00000038;
+            box-shadow: inset 35px 20px 8px 0px #efefef80;
+            
+            input, select {    
+
+                &::placeholder {
+                    color: $lightModeFontColor;
+                    opacity: 0.5;
+                   
+                }
+            }
+
+            .hideShow {
+                z-index: 6;
+                cursor: pointer;
+                padding: 0 10px;
+            }
+            
+        }
+
+        .passwordInputBox {
+
+            button {
+                border-left: 1px solid #210b0026;
+                opacity: 0.5;
+
+                svg {
+                    color: $lightModeFontColor;
+                    font-size: 16px;
+                }
+            }
+        }
+
+        button[type="submit"] {
+            border: 2px solid $darkModeFontColor;
+            color: $darkModeFontColor;
+            box-shadow: inset 1px 1px 31px $darkModeFontColor;
+            background: $lightModeDivBg;
+
+            &:hover {
+                border-radius: 25px 0 25px 0;
+            }
+
+        }
+    }
+}
+
+.dark {
+
+    .account {
+        .signChoices {
+            border-bottom: 1px solid #ffeae026;
+
+            li {
+
+                &:hover {
+                    background: $lightModeDivBg
+                }
+
+                &.active {
+                    border-bottom: 3px solid $darkModeFontColor;
+                }
+            }
+        }
+
+        .inputBox, .passwordInputBox {
+            background: $darkModeGradient;
+            border: 1px solid #ffffff38;
+            box-shadow: inset 35px 20px 8px 0px #452e29;
+            
+            input, select {    
+                color: $darkModeFontColor;
+
+                &::placeholder {
+                    color: $darkModeFontColor;
+                    opacity: 0.5;
+                   
+                }
+            }
+
+            .hideShow {
+                z-index: 6;
+                cursor: pointer;
+                padding: 0 10px;
+            }
+            
+        }
+
+        .passwordInputBox {
+
+            button {
+                border-left: 1px solid #ffeae026;
+                opacity: 0.5;
+
+                svg {
+                    color: $darkModeFontColor;
+                }
+            }
+        }
+
+        button[type="submit"] {
+            border: 2px solid #ededed3b;
+            color: $darkModeFontColor;
+            box-shadow: inset 1px 1px 31px #ededed3b;
+
+            &:hover {
+                border-radius: 25px 0 25px 0;
+            }
+
+        }
+    }
+}
