@@ -1,9 +1,12 @@
 .account {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 
     .signChoices {
         display: flex;
         align-items: center;
-        margin: 50px auto;
+        margin: 1.5vw auto;
         width: max-content;
         font-size: 20px;
 
@@ -24,17 +27,69 @@
         }
     }
 
+    .signIn {
+        height: 100%;
+    }
+
 
     form {
         display: flex;
         flex-direction: column;
         gap: 10px;
         width: 35vw;
-        margin: 150px auto;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        position: relative;
 
-        .inputBox, .passwordInputBox {
+        // .choices__inner {
+        //     background-color: $lightModeFontColor;
+        //     border-radius: 6px;
+        //     padding: 0.5rem;
+        //     border: 1px solid #ccc;
+        //     font-size: 16px;
+        //   }
+          
+        //   .choices__list--dropdown .choices__item {
+        //     padding: 0.5rem;
+        //     &:hover {
+        //       background-color: #f0f0f0;
+        //     }
+        //   }
+
+        .choices {
+            margin-bottom: 0;
+        }
+        
+        .choices__inner {
+            padding: 0 0.5vw;
+            min-height: auto;
+        }
+
+        .choices__list--single  {
+            position: relative;
+            z-index: 6;
+        }
+
+        .choices[data-type*=select-one] .choices__inner {
+            padding-bottom: 0;
+        }
+
+        .choices__list, .choices__list--dropdown {
+            position: relative;
+            z-index: 6;
+            border-radius: 25px;
+            border: none;
+        }
+        
+        .choices__list--dropdown {
+            margin-top: 5px;
+        }
+
+        .inputBox, .passwordInputBox, .choices__inner {
             border-radius: $borderRadius;
             position: relative;
+            transition: 0.3s ease-in;
 
             input, select  {
                 background: transparent;
@@ -42,11 +97,16 @@
                 border-radius: $borderRadius;
                 position: relative;
                 z-index: 6;
-                padding: 12px;
+                padding: 0.5vw;
                 font-family: $font1;
 
                 &::placeholder {
                     font-family: $font1;
+                }
+
+                &:focus-visible {
+                    border: none;
+                    outline: none;
                 }
             }
 
@@ -58,9 +118,10 @@
 
             select {
                 width: 98%;
+
             }
 
-
+           
             
             &::before {
                 content: "";
@@ -102,7 +163,7 @@
         button[type="submit"] {
             margin: 30px auto;
             width: 30%;
-            padding: 15px;
+            padding: 0.5vw;
             border-radius: $borderRadius;
             font-family: $font1;
             text-transform: uppercase;
@@ -135,10 +196,10 @@
         }
 
         
-        .inputBox, .passwordInputBox {
+        .inputBox, .passwordInputBox, .choices__inner {
             background: $lightModeGradient;
             border: 1px solid #00000038;
-            box-shadow: inset 35px 20px 8px 0px #efefef80;
+            box-shadow: inset 35px 20px 8px 0px #efefef2e;
             
             input, select {    
 
@@ -171,9 +232,9 @@
         }
 
         button[type="submit"] {
-            border: 2px solid $darkModeFontColor;
-            color: $darkModeFontColor;
-            box-shadow: inset 1px 1px 31px $darkModeFontColor;
+            border: 2px solid $lightModeFontColor;
+            color: $lightModeFontColor;
+            box-shadow: inset 1px 1px 31px $lightModeFontColor;
             background: $lightModeDivBg;
 
             &:hover {
@@ -202,7 +263,7 @@
             }
         }
 
-        .inputBox, .passwordInputBox {
+        .inputBox, .passwordInputBox, .choices__inner {
             background: $darkModeGradient;
             border: 1px solid #ffffff38;
             box-shadow: inset 35px 20px 8px 0px #452e29;

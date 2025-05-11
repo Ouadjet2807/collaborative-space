@@ -42,7 +42,7 @@ export default function ThemeContextProvider(props) {
         })
         gsap.to('.light .App > div', {
             background: "##ffffff26",
-            color: "#222",
+            color: "#543730",
             delay: 0.2,
             ease: "power3.in"
         })

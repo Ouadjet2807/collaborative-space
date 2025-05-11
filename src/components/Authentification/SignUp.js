@@ -1,6 +1,8 @@
-import React, {useState} from 'react'
+import React, {useState, useRef, useEffect} from 'react'
 import { TbEyeClosed } from "react-icons/tb";
 import { TbEye } from "react-icons/tb";
+import Choices from "choices.js";
+import "choices.js/public/assets/styles/choices.min.css";
 
 export default function SignUp() {
 
@@ -9,6 +11,8 @@ export default function SignUp() {
     confirmPassword: false
   })
 
+  const selectRef = useRef(null);
+  const choicesInstance = useRef(null);
 
   console.log(passwordInputsShow);
   
@@ -55,6 +59,24 @@ export default function SignUp() {
     }, 
   ]
 
+  
+  useEffect(() => {
+    if (selectRef.current) {
+      choicesInstance.current = new Choices(selectRef.current, {
+        searchEnabled: false,
+        itemSelectText: "",
+        shouldSort: false,
+      });
+    }
+
+    return () => {
+      // Destroy instance on unmount
+      if (choicesInstance.current) {
+        choicesInstance.current.destroy();
+      }
+    };
+  }, []);
+
   return (
     <div className='signUp'>
         <form>
@@ -67,16 +89,14 @@ export default function SignUp() {
             <div className="inputBox">
                 <input type="email" name="email" id="input_email" placeholder='Your email address'/>
             </div>
-            <div className="inputBox">
-                <select name="team" id="input_team">
-                    <div className="options">
-                        <option value="" disabled>Select your team</option>
-                        {teams.map(team => {
-                            return <option key={team.id} value={team.value}>{team.name}</option>
-                        })}
-                    </div>
-                </select>
-            </div>
+            <select name="team" id="choices-select" className='choice' ref={selectRef}>
+                <div className="options">
+                    <option value="">Select your team</option>
+                    {teams.map(team => {
+                        return <option key={team.id} value={team.value}>{team.name}</option>
+                    })}
+                </div>
+            </select>
             <div className="passwordInputBox">
                 <input type={passwordInputsShow.password ? "text" : "password"} name="password" className='passwordInput' id="input_password" placeholder="Choose a password"/>
                 <button type="button" className="hideShow" onClick={() => setPasswordInputsShow(prev => ({...prev, password: !prev.password}))}>

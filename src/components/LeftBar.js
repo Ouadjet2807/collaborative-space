@@ -11,6 +11,7 @@ import { BsPersonCircle  } from 'react-icons/bs'
 import { IoMdMoon } from "react-icons/io";
 import { IoMdSunny } from "react-icons/io";
 import gsap from "gsap"
+import useWindowDimensions from '../hook/useWindowDimensions'
 
 export default function LeftBar({setActiveComponent, activeComponent}) {
 
@@ -19,6 +20,8 @@ export default function LeftBar({setActiveComponent, activeComponent}) {
 
   const {darkTheme, toggleTheme} = useContext(ThemeContext)
 
+  const {width, height} = useWindowDimensions()
+
   const tl = gsap.timeline()
 
   const extend = () => {
@@ -26,18 +29,19 @@ export default function LeftBar({setActiveComponent, activeComponent}) {
       tl.to('.leftBar', {
         width: "15vw",
         ease: "back.inOut",
-        duration: 0.1,
+        duration: 0.3,
       })
       .to('.leftBar li', {
-        padding: '15px 50px',
+        padding: '15px 2vw',
+        justifyContent: "left",
         ease: "back.inOut",
-        duration: 0.1
+        duration: 0.3
       })
       .to('.leftBar span', {
         opacity: 1,
         display: "block",
         ease: "back.inOut",
-        duration: 0.1
+        duration: 0.3
       })
       
       
@@ -48,23 +52,39 @@ export default function LeftBar({setActiveComponent, activeComponent}) {
   const shorten = () => {
     if(!tabIsPinned) {
     tl.to('.leftBar li', {
-      padding: '15px 25px',
+      padding: '15px 1vw',
       ease: "back.inOut",
-      duration: 0.1
+      duration: 0.3
     })
     .to('.leftBar span', {
       opacity: 0,
       display: "none",
+      duration: 0.3,
       ease: "back.inOut"
     })
     .to('.leftBar', {
-      width: "4vw",
-      ease: "back.inOut"
+      width: width > 1600 ? "4vw" : "6vw",
+      duration: 0.3,
+      ease: "back.inOut",
+      onComplete: () => {
+        gsap.to(".leftBar li", {
+          justifyContent: "center",
+          duration: 0.3
+        })
+      }
     })
     
 
     setTabIsOpen(false)
    }
+  }
+
+  const handleComponent = (component) => {
+    if(!component) {
+      return
+    } else {
+      setActiveComponent(component)
+    }
   }
 
   return (
@@ -78,11 +98,11 @@ export default function LeftBar({setActiveComponent, activeComponent}) {
         </div>
         <div className="nav">
             <ul className="tab">
-                <li onClick={(e) => setActiveComponent(e.target.innerText)} className={activeComponent === "Dashboard" ? "active" : ""}><BsSpeedometer /> <span>Dashboard</span></li>
-                <li onClick={(e) => setActiveComponent(e.target.innerText)} className={activeComponent === "Drive" ? "active" : ""}><BsInboxes/> <span>Drive</span></li>
-                <li onClick={(e) => setActiveComponent(e.target.innerText)} className={activeComponent === "Statistics" ? "active" : ""}><BsBarChart/> <span>Statistics</span></li>
+                <li onClick={(e) => handleComponent(e.target.innerText)} className={activeComponent === "Dashboard" ? "active" : ""}><BsSpeedometer /> <span>Dashboard</span></li>
+                <li onClick={(e) => handleComponent(e.target.innerText)} className={activeComponent === "Drive" ? "active" : ""}><BsInboxes/> <span>Drive</span></li>
+                <li onClick={(e) => handleComponent(e.target.innerText)} className={activeComponent === "Statistics" ? "active" : ""}><BsBarChart/> <span>Statistics</span></li>
                 <li onClick={toggleTheme}>{darkTheme ? <IoMdSunny/> : <IoMdMoon/>} <span>{darkTheme ? "Light" : "Dark"} mode</span></li>
-                <li onClick={(e) => setActiveComponent(e.target.innerText)} className={activeComponent === "Account" ? "active" : ""}><BsPersonCircle/> <span>Account</span></li>
+                <li onClick={(e) => handleComponent(e.target.innerText)} className={activeComponent === "Account" ? "active" : ""}><BsPersonCircle/> <span>Account</span></li>
             </ul>
         </div>
     </div>
