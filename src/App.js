@@ -1,18 +1,19 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import LeftBar from "./components/LeftBar";
 import { ThemeContext} from "./context/themeContext";
 import DashBoard from "./components/DashBoard";
 import Account from "./components/Account";
 import Drive from "./components/Drive";
 import Statistics from "./components/Statistics";
+import Tasks from "./components/Tasks";
 
 function App() {
 
-  const [activeComponent, setActiveComponent] = useState('DashBoard')
+  const [activeComponent, setActiveComponent] = useState('dashBoard')
 
   console.log(activeComponent)
 
-  const renderCurrentCompoent = () => {
+  const renderCurrentComponent = () => {
     switch (activeComponent.toLowerCase()) {
         case "":
         case "dashboard":
@@ -21,6 +22,8 @@ function App() {
             return <Drive />;
         case "statistics":
             return <Statistics />;
+        case "tasks":
+            return <Tasks />;
         case "account":
             return <Account />;
         default:
@@ -28,12 +31,11 @@ function App() {
     }
 };
 
-
   return (
     <div className="App">
       <LeftBar activeComponent={activeComponent} setActiveComponent={setActiveComponent}/>
       <div className="rightBlock" activeComponent={activeComponent}>
-        {renderCurrentCompoent()}
+        {renderCurrentComponent()}
       </div>
     </div>
   );

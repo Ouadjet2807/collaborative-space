@@ -28,7 +28,11 @@
     }
 
     .signIn {
-        height: 100%;
+        height: 65%;
+    }
+
+    .signUp {
+        height: 65%;
     }
 
 
@@ -197,7 +201,7 @@
 
         
         .inputBox, .passwordInputBox, .choices__inner {
-            background: $lightModeGradient;
+            // background: $lightModeGradient;
             border: 1px solid #00000038;
             box-shadow: inset 35px 20px 8px 0px #efefef2e;
             
@@ -264,7 +268,7 @@
         }
 
         .inputBox, .passwordInputBox, .choices__inner {
-            background: $darkModeGradient;
+            // background: $darkModeGradient;
             border: 1px solid #ffffff38;
             box-shadow: inset 35px 20px 8px 0px #452e29;
             

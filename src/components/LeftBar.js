@@ -12,6 +12,7 @@ import { IoMdMoon } from "react-icons/io";
 import { IoMdSunny } from "react-icons/io";
 import gsap from "gsap"
 import useWindowDimensions from '../hook/useWindowDimensions'
+import { GoTasklist } from "react-icons/go";
 
 export default function LeftBar({setActiveComponent, activeComponent}) {
 
@@ -101,6 +102,7 @@ export default function LeftBar({setActiveComponent, activeComponent}) {
                 <li onClick={(e) => handleComponent(e.target.innerText)} className={activeComponent === "Dashboard" ? "active" : ""}><BsSpeedometer /> <span>Dashboard</span></li>
                 <li onClick={(e) => handleComponent(e.target.innerText)} className={activeComponent === "Drive" ? "active" : ""}><BsInboxes/> <span>Drive</span></li>
                 <li onClick={(e) => handleComponent(e.target.innerText)} className={activeComponent === "Statistics" ? "active" : ""}><BsBarChart/> <span>Statistics</span></li>
+                <li onClick={(e) => handleComponent(e.target.innerText)} className={activeComponent === "Tasks" ? "active" : ""}><GoTasklist/> <span>Tasks</span></li>
                 <li onClick={toggleTheme}>{darkTheme ? <IoMdSunny/> : <IoMdMoon/>} <span>{darkTheme ? "Light" : "Dark"} mode</span></li>
                 <li onClick={(e) => handleComponent(e.target.innerText)} className={activeComponent === "Account" ? "active" : ""}><BsPersonCircle/> <span>Account</span></li>
             </ul>
