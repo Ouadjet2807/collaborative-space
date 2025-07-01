@@ -13,6 +13,9 @@ import { IoMdSunny } from "react-icons/io";
 import gsap from "gsap"
 import useWindowDimensions from '../hook/useWindowDimensions'
 import { GoTasklist } from "react-icons/go";
+import { useGSAP } from '@gsap/react'
+
+gsap.registerPlugin(useGSAP);
 
 export default function LeftBar({setActiveComponent, activeComponent}) {
 
@@ -25,61 +28,6 @@ export default function LeftBar({setActiveComponent, activeComponent}) {
 
   const tl = gsap.timeline()
 
-  const extend = () => {
-    if(!tabIsPinned) {
-      tl.to('.leftBar', {
-        width: "15vw",
-        ease: "back.inOut",
-        duration: 0.3,
-      })
-      .to('.leftBar li', {
-        padding: '15px 2vw',
-        justifyContent: "left",
-        ease: "back.inOut",
-        duration: 0.3
-      })
-      .to('.leftBar span', {
-        opacity: 1,
-        display: "block",
-        ease: "back.inOut",
-        duration: 0.3
-      })
-      
-      
-      setTabIsOpen(true)
-    }
-  }
-
-  const shorten = () => {
-    if(!tabIsPinned) {
-    tl.to('.leftBar li', {
-      padding: '15px 1vw',
-      ease: "back.inOut",
-      duration: 0.3
-    })
-    .to('.leftBar span', {
-      opacity: 0,
-      display: "none",
-      duration: 0.3,
-      ease: "back.inOut"
-    })
-    .to('.leftBar', {
-      width: width > 1600 ? "4vw" : "6vw",
-      duration: 0.3,
-      ease: "back.inOut",
-      onComplete: () => {
-        gsap.to(".leftBar li", {
-          justifyContent: "center",
-          duration: 0.3
-        })
-      }
-    })
-    
-
-    setTabIsOpen(false)
-   }
-  }
-
   const handleComponent = (component) => {
     if(!component) {
       return
@@ -88,10 +36,55 @@ export default function LeftBar({setActiveComponent, activeComponent}) {
     }
   }
 
+  useGSAP(() => {
+    if(tabIsOpen && !tabIsPinned) {
+      tl.to('.leftBar', {
+          width: "15vw",
+          ease: "back.inOut",
+          duration: 0.3,
+        })
+        .to('.leftBar li', {
+          padding: '15px 2vw',
+          justifyContent: "left",
+          ease: "back.inOut",
+          duration: 0.3
+        })
+        .to('.leftBar span', {
+          opacity: 1,
+          display: "block",
+          ease: "back.inOut",
+          duration: 0.3
+        })
+    } else if (!tabIsOpen && !tabIsPinned) {
+        tl.to('.leftBar li', {
+          padding: '15px 1vw',
+          ease: "back.inOut",
+          duration: 0.3
+        })
+        .to('.leftBar span', {
+          opacity: 0,
+          display: "none",
+          duration: 0.3,
+          ease: "back.inOut"
+        })
+        .to('.leftBar', {
+          width: width > 1600 ? "4vw" : "6vw",
+          duration: 0.3,
+          ease: "back.inOut",
+          onComplete: () => {
+            gsap.to(".leftBar li", {
+              justifyContent: "center",
+              duration: 0.3
+            })
+          }
+        })
+    }
+  }, [tabIsOpen])
+
   return (
-    <div className="leftBar" onMouseEnter={extend} onMouseLeave={shorten}>
+    <div className="leftBar" onMouseEnter={() => setTabIsOpen(true)} onMouseLeave={() => setTabIsOpen(false)}>
         <div className="header">
-        {tabIsOpen &&
+        {(tabIsOpen || tabIsPinned) &&
         <div className={`pin ${tabIsPinned ? "active" : ""}`} onClick={() => setTabIsPinned(!tabIsPinned)}><BsFillPinFill /></div>
         }
             <h4>Menu</h4>

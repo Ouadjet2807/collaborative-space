@@ -13,6 +13,9 @@ function App() {
 
   console.log(activeComponent)
 
+  useEffect(() => {
+  }, [])
+
   const renderCurrentComponent = () => {
     switch (activeComponent.toLowerCase()) {
         case "":

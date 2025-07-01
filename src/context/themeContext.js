@@ -1,5 +1,8 @@
 import React, { useState, useEffect, createContext } from 'react'
 import gsap from "gsap"
+import { useGSAP } from '@gsap/react'
+
+gsap.registerPlugin(useGSAP);
 
 export const ThemeContext = createContext()
 
@@ -18,7 +21,7 @@ export default function ThemeContextProvider(props) {
     localStorage.setItem('darkTheme', !darkTheme)
   }
 
-  useEffect(() => {
+  useGSAP(() => {
     document.body.classList.toggle('dark', darkTheme)
     document.body.classList.toggle('light', !darkTheme)
 
