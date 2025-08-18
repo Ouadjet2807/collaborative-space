@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { FiPlus } from "react-icons/fi";
 import { GetTasksData } from "../data/GetTasksData";
+import { db } from "../firebase-config"
+import { collection, getDocs, setDo, updateDoc, where, query, deleteDoc } from "firebase/firestore";
+import OpenModal from "./OpenModal";
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+import Example from "./Example";
 
 export default function Tasks() {
   const [tasks, setTasks] = useState();
   const [addTaskModal, setAddTaskModal] = useState(false)
+  const [modalInfo, setModalInfo] = useState({})
 
-  const createTask = (type) => {
+  const toggleModal = (type) => {
     setAddTaskModal(true)
-
-
+    setModalInfo(type)
   }
 
   useEffect(() => {
@@ -20,13 +26,9 @@ export default function Tasks() {
   });
   return (
     <>
-    {
-        addTaskModal && 
-
-        <div className="modal">
-            
-        </div>
-    }
+    
+        <Example />
+    
         <div className="tasks">
         <h1>Tasks</h1>
 
@@ -46,7 +48,7 @@ export default function Tasks() {
                     ({tasks && tasks.filter((task) => task.type === "toDo").length})
                 </span>
                 </h3>
-                <div className="add" onClick={() => createTask("todo")}>
+                <div className="add" onClick={() => toggleModal("todo")}>
                 <FiPlus />
                 </div>
             </div>
@@ -74,7 +76,7 @@ export default function Tasks() {
                     )
                 </span>
                 </h3>
-                <div className="add" onClick={() => createTask("In progress")}>
+                <div className="add" onClick={() => toggleModal("In progress")}>
                 <FiPlus />
                 </div>
             </div>
@@ -102,7 +104,7 @@ export default function Tasks() {
                     )
                 </span>
                 </h3>
-                <div className="add" onClick={() => createTask("In review")}>
+                <div className="add" onClick={() => toggleModal("In review")}>
                 <FiPlus />
                 </div>
             </div>
@@ -127,7 +129,7 @@ export default function Tasks() {
                     ({tasks && tasks.filter((task) => task.type === "Done").length})
                 </span>
                 </h3>
-                <div className="add" onClick={() => createTask("Done")}>
+                <div className="add" onClick={() => toggleModal("Done")}>
                 <FiPlus />
                 </div>
             </div>
